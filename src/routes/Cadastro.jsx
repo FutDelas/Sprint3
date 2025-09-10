@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-const Login = () => {
+const Cadastro = () => {
   const { register, handleSubmit, reset } = useForm();
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
@@ -54,4 +54,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Cadastro;

@@ -11,7 +11,7 @@ const Nav = () => {
             <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Home</Link>
           </li>
           <li>
-            <Link to="/login" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Login</Link>
+            <Link to="/cadastro" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Login</Link>
           </li>
         </ul>
       </nav>

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes} from "react-router-dom"
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Home from './routes/Home'
-import Login from './routes/Login'
+import Cadastro from './routes/Cadastro'
 import Error from './routes/Error'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
 
         <Route path="/" element={<Home/>}/>
 
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/cadastro" element={<Cadastro/>}/>
 
       </Routes>
     </main>
