@@ -12,11 +12,14 @@ function App() {
     <Nav/>
     <main>
       <Routes>
-        <Route path="*" element={<Error/>}/>
 
         <Route path="/" element={<Home/>}/>
 
         <Route path="/cadastro" element={<Cadastro/>}/>
+
+        <Route path="*" element={<Error/>}/>
+
+        
 
       </Routes>
     </main>
