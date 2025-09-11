@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import Home from './routes/Home'
 import Cadastro from './routes/Cadastro'
 import Error from './routes/Error'
+import Mapa from './routes/Mapa'
 
 function App() {
   
@@ -19,7 +20,7 @@ function App() {
 
         <Route path="*" element={<Error/>}/>
 
-        
+        <Route path="/mapa" element={<Mapa/>}/>
 
       </Routes>
     </main>
