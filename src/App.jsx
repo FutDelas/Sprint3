@@ -5,6 +5,7 @@ import Home from './routes/Home'
 import Cadastro from './routes/Cadastro'
 import Error from './routes/Error'
 import Mapa from './routes/Mapa'
+import Torneios from './routes/Torneios'
 
 function App() {
   
@@ -21,6 +22,8 @@ function App() {
         <Route path="*" element={<Error/>}/>
 
         <Route path="/mapa" element={<Mapa/>}/>
+
+        <Route path="/torneios" element={<Torneios/>}/>
 
       </Routes>
     </main>
