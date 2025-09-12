@@ -1,72 +1,101 @@
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+// Cadastro.jsx
+import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Cadastro = () => {
   const { register, handleSubmit, reset } = useForm();
-  const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
-  const cadastrarPerfil = (data) => {
-    const { email, password } = data;
-    const emailExistente = users.some(user => user.email === email);
-    if (emailExistente) {
-      setMessage("Este e-mail já está cadastrado");
+  // Pega os usuários já cadastrados do localStorage
+  const getUsers = () => {
+    const users = localStorage.getItem("users");
+    return users ? JSON.parse(users) : [];
+  };
+
+  const onSubmit = (data) => {
+    const users = getUsers();
+
+    // Verifica se o email já existe
+    const userExists = users.some((user) => user.email === data.email);
+
+    if (userExists) {
+      setMessage("E-mail já cadastrado... redirecionando para login");
+      setTimeout(() => {
+        navigate("/login"); // redireciona para Login.jsx
+      }, 2000);
     } else {
-      setUsers([...users, { email, password }]);
-      setMessage("Usuário cadastrado com sucesso!");
+      // Cria novo usuário
+      const novoUser = {
+        nome: data.nome,
+        idade: data.idade,
+        email: data.email,
+        senha: data.senha,
+        posicao: data.posicao,
+        foto: data.foto || "",
+      };
+
+      // Salva no localStorage
+      localStorage.setItem("users", JSON.stringify([...users, novoUser]));
+      setMessage("Cadastro realizado com sucesso!");
       reset();
     }
   };
 
-  useEffect(() => {
-    const usuariosSalvos = localStorage.getItem("users");
-    if (usuariosSalvos) {
-      setUsers(JSON.parse(usuariosSalvos));
-    }
-  }, []);
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4 text-center">Cadastro</h2>
 
-  useEffect(() => {
-    localStorage.setItem("users", JSON.stringify(users));
-  }, [users]);
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <input
+            {...register("nome", { required: true })}
+            placeholder="Nome"
+            className="border p-2 rounded"
+          />
+          <input
+            {...register("dataNascimento", { required: true })}
+            type="number"
+            placeholder="Data de Nascimento"
+            className="border p-2 rounded"
+          />
+          <input
+            {...register("email", { required: true })}
+            type="email"
+            placeholder="E-mail"
+            className="border p-2 rounded"
+          />
+          <input
+            {...register("senha", { required: true })}
+            type="password"
+            placeholder="Senha"
+            className="border p-2 rounded"
+          />
+          <select {...register("posicao", { required: true })} className="border p-2 rounded">
+            <option value="">Selecione a posição em campo</option>
+            <option value="Goleiro">Goleiro</option>
+            <option value="Zagueiro">Zagueiro</option>
+            <option value="Lateral">Lateral</option>
+            <option value="Meio-campo">Meio-campo</option>
+            <option value="Atacante">Atacante</option>
+          </select>
+          <input
+            {...register("foto")}
+            type="text"
+            placeholder="URL da Foto (opcional)"
+            className="border p-2 rounded"/>
 
-   return (
-    <div className="relative min-h-screen bg-blue-800 flex items-center justify-center">
-      {/* Fundo com gradiente */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#001449,#061013)] opacity-90"></div>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Cadastrar</button>
+          <button onClick={() => navigate("/")} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Teste</button>
 
-      {/* Conteúdo por cima */}
-      <div className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md z-10">
-        <h2 className="text-2xl font-bold text-center text-[#14001dff] mb-6">Login</h2>
-        <form onSubmit={handleSubmit(cadastrarPerfil)} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email:</label>
-            <input 
-              type="email" 
-              {...register("email", { required: true })} 
-              placeholder="Digite seu email" 
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Senha:</label>
-            <input 
-              type="password" 
-              {...register("password", { required: true })} 
-              placeholder="Digite sua senha" 
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <button 
-            type="submit" 
-            className="cursor-pointer w-full bg-[#14001dff] text-white py-2 px-4 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Entrar
-          </button>
-        </form>
+          </form>
+
         {message && (
-          <p className={`mt-4 text-center ${message.includes("cadastrado") ? "text-red-600" : "text-green-600"}`}>
-            {message}
-          </p>
+          <p className="text-center text-sm text-red-500 mt-4">{message}</p>
         )}
       </div>
     </div>

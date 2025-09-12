@@ -22,7 +22,7 @@ const Nav = () => {
             to="/cadastro"
             className="hover:text-yellow-300 font-bold transition-colors cursor-pointer"
           >
-            Login
+            Cadastro
           </Link>
         </div>
       </div>
