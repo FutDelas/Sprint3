@@ -9,6 +9,7 @@ import Torneios from './routes/Torneios'
 import Login from './routes/Login'
 import CadastroOrganizador from './routes/CadastroOrganizador'
 import LoginOrganizador from './routes/LoginOrganizador'
+import CanalDosPaiseResponsaveis from "./routes/CanalDePaiseResponsaveis"
 
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
         <Route path="/cadastro-organizador" element={<CadastroOrganizador/>}/>
 
         <Route path="/login-organizador" element={<LoginOrganizador/>}/>
+
+        <Route path="/canal-de-pais-e-responsaveis" element={<CanalDosPaiseResponsaveis/>}/>
 
       </Routes>
     </main>
