@@ -42,63 +42,27 @@ const Cadastro = () => {
           Cadastro
         </h1>
         <form onSubmit={handleCadastro} className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Nome completo"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            required
-            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-          />
-          <input
-            type="date"
-            value={dataNascimento}
-            onChange={(e) => setDataNascimento(e.target.value)}
-            required
-            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-          />
-          <input
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            required
-            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
-          />
+          
+          <input type="text" placeholder="Nome completo" value={nome} onChange={(e) => setNome(e.target.value)} required className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"/>
+          
+          <input type="date" value={dataNascimento} onChange={(e) => setDataNascimento(e.target.value)} required className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"/>
+          
+          <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} required className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"/>
 
-          <select
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 text-gray-600"
-            required
-          >
-            <option value="" disabled>
-              Selecione o tipo de conta
-            </option>
+          <input type="password" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} required className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"/>
+
+          <select value={tipo} onChange={(e) => setTipo(e.target.value)} className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 text-gray-600" required>
+            
+            <option value="" disabled>Selecione o tipo de conta</option>
             <option value="jogadora">Jogadora</option>
             <option value="treinador">Treinador</option>
+          
           </select>
 
-          <button
-            type="submit"
-            className="bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition"
-          >
-            Cadastrar
-          </button>
-          <p
-            onClick={() => navigate("/login")}
-            className="text-center text-sm text-gray-500 mt-2 cursor-pointer hover:underline"
-          >
-            Já tem conta? Faça login
-          </p>
+          <button type="submit" className="bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition">Cadastrar</button>
+          
+          <p onClick={() => navigate("/login")} className="text-center text-sm text-gray-500 mt-2 cursor-pointer hover:underline">Já tem conta? Faça login</p>
+        
         </form>
       </div>
     </div>
