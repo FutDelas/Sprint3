@@ -1,4 +1,4 @@
-import Logo from "../assets/logo.png";
+import Logo from "../assets/logo.svg";
 import { FaInstagram, FaFacebookF } from "react-icons/fa";
 
 const SocialFooter = () => {

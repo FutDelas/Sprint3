@@ -50,29 +50,14 @@ const Cadastro = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">Cadastro</h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <input
-            {...register("nome", { required: true })}
-            placeholder="Nome"
-            className="border p-2 rounded"
-          />
-          <input
-            {...register("dataNascimento", { required: true })}
-            type="number"
-            placeholder="Data de Nascimento"
-            className="border p-2 rounded"
-          />
-          <input
-            {...register("email", { required: true })}
-            type="email"
-            placeholder="E-mail"
-            className="border p-2 rounded"
-          />
-          <input
-            {...register("senha", { required: true })}
-            type="password"
-            placeholder="Senha"
-            className="border p-2 rounded"
-          />
+          <input {...register("nome", { required: true })} placeholder="Nome" className="border p-2 rounded"/>
+          
+          <input {...register("dataNascimento", { required: true })} type="data" placeholder="Data de Nascimento" className="border p-2 rounded"/>
+          
+          <input {...register("email", { required: true })} type="email" placeholder="E-mail" className="border p-2 rounded"/>
+         
+          <input {...register("senha", { required: true })} type="password" placeholder="Senha" className="border p-2 rounded"/>
+          
           <select {...register("posicao", { required: true })} className="border p-2 rounded">
             <option value="">Selecione a posição em campo</option>
             <option value="Goleiro">Goleiro</option>
