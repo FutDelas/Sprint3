@@ -59,7 +59,7 @@ const Cadastro = () => {
           
           </select>
 
-          <button type="submit" className="bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition">Cadastrar</button>
+          <button type="submit" className="bg-purple-700 text-white font-semibold py-3 rounded-lg hover:bg-purple-900 transition">Cadastrar</button>
           
           <p onClick={() => navigate("/login")} className="text-center text-sm text-gray-500 mt-2 cursor-pointer hover:underline">Já tem conta? Faça login</p>
         

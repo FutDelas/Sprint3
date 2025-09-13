@@ -17,7 +17,7 @@ const CanalDosPais = () => {
       </h1>
       <div className="m-10 mt">
       {/* Seção Saúde Física e Emocional */}
-      <section className="bg-purple-800 rounded-2xl p-6 mb-6">
+      <section className="bg-yellow-600 rounded-2xl p-6 mb-6">
         <h2 className="text-2xl font-semibold text-white mb-3">
           Cuidados com a Saúde Física e Emocional
         </h2>
@@ -30,7 +30,7 @@ const CanalDosPais = () => {
       </section>
 
       {/* Seção Fair Play */}
-      <section className="bg-fuchsia-700 shadow-lg rounded-2xl p-6 mb-6">
+      <section className="bg-purple-700 shadow-lg rounded-2xl p-6 mb-6">
         <h2 className="text-2xl font-semibold text-white mb-3">
           Orientações sobre Fair Play
         </h2>
@@ -43,7 +43,7 @@ const CanalDosPais = () => {
       </section>
 
       {/* Seção FAQ */}
-      <section className="bg-purple-800 shadow-lg rounded-2xl p-6 mb-6">
+      <section className="bg-yellow-600 shadow-lg rounded-2xl p-6 mb-6">
         <h2 className="text-2xl font-semibold text-white mb-3">
           FAQ - Dúvidas Frequentes
         </h2>
@@ -71,7 +71,7 @@ const CanalDosPais = () => {
       </section>
 
       {/* Seção Formulário */}
-      <section className="bg-fuchsia-700 rounded-2xl p-6">
+      <section className="bg-purple-700 rounded-2xl p-6">
         <h2 className="text-2xl font-semibold text-white mb-3">
           Envie suas sugestões, críticas ou avisos
         </h2>
@@ -95,7 +95,7 @@ const CanalDosPais = () => {
           ></textarea>
           <button
             type="submit"
-            className="bg-purple-800 hover:bg-purple-900 text-white font-semibold px-4 py-2 rounded-lg"
+            className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-4 py-2 rounded-lg"
           >
             Enviar
           </button>

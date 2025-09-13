@@ -31,7 +31,7 @@ const CadastroOrganizador = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-[#01183c]">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-        <h1 className="text-3xl font-bold text-center text-indigo-700 mb-6">
+        <h1 className="text-3xl font-bold text-center text-purple-700 mb-6">
           Cadastro Organizador
         </h1>
         <form onSubmit={handleCadastro} className="flex flex-col gap-4">
@@ -44,7 +44,7 @@ const CadastroOrganizador = () => {
           
           <input type="tel" placeholder="Telefone" value={telefone} onChange={(e) => setTelefone(e.target.value)} required className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
 
-          <button type="submit" className="bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition">Cadastrar Organizador</button>
+          <button type="submit" className="bg-purple-700 text-white font-semibold py-3 rounded-lg hover:bg-purple-900 transition">Cadastrar Organizador</button>
 
           <p onClick={() => navigate("/login-organizador")} className="text-center text-sm text-gray-500 mt-2 cursor-pointer hover:underline">Já tem conta de organizador? Faça login</p>
 
