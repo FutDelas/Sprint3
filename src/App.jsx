@@ -6,6 +6,10 @@ import Cadastro from './routes/Cadastro'
 import Error from './routes/Error'
 import Mapa from './routes/Mapa'
 import Torneios from './routes/Torneios'
+import Login from './routes/Login'
+import CadastroOrganizador from './routes/CadastroOrganizador'
+import LoginOrganizador from './routes/LoginOrganizador'
+
 
 function App() {
   
@@ -24,6 +28,12 @@ function App() {
         <Route path="/mapa" element={<Mapa/>}/>
 
         <Route path="/torneios" element={<Torneios/>}/>
+
+        <Route path="/login" element={<Login/>}/>
+
+        <Route path="/cadastro-organizador" element={<CadastroOrganizador/>}/>
+
+        <Route path="/login-organizador" element={<LoginOrganizador/>}/>
 
       </Routes>
     </main>

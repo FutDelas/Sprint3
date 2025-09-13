@@ -27,7 +27,7 @@ const Home = () => {
           </button>
 
           <button
-            onClick={() => navigate("/painel")}
+            onClick={() => navigate("/cadastro-organizador")}
             className="cursor-pointer bg-purple-800 text-white font-bold py-3 px-6 rounded-full hover:bg-[#14001dff] transition transform hover:scale-105"
           >
             🎁 Painel para Organizadores

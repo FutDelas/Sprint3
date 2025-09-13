@@ -1,88 +1,107 @@
-// Cadastro.jsx
-import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Cadastro = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const [message, setMessage] = useState("");
+  const [nome, setNome] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [tipo, setTipo] = useState(""); // começa vazio
   const navigate = useNavigate();
 
-  // Pega os usuários já cadastrados do localStorage
-  const getUsers = () => {
-    const users = localStorage.getItem("users");
-    return users ? JSON.parse(users) : [];
-  };
+  const handleCadastro = (e) => {
+    e.preventDefault();
 
-  const onSubmit = (data) => {
-    const users = getUsers();
-
-    // Verifica se o email já existe
-    const userExists = users.some((user) => user.email === data.email);
-
-    if (userExists) {
-      setMessage("E-mail já cadastrado... redirecionando para login");
-      setTimeout(() => {
-        navigate("/login"); // redireciona para Login.jsx
-      }, 2000);
-    } else {
-      // Cria novo usuário
-      const novoUser = {
-        nome: data.nome,
-        idade: data.idade,
-        email: data.email,
-        senha: data.senha,
-        posicao: data.posicao,
-        foto: data.foto || "",
-      };
-
-      // Salva no localStorage
-      localStorage.setItem("users", JSON.stringify([...users, novoUser]));
-      setMessage("Cadastro realizado com sucesso!");
-      reset();
+    if (!tipo) {
+      alert("Por favor, selecione o tipo de conta.");
+      return;
     }
+
+    const novoUsuario = { nome, dataNascimento, email, senha, tipo };
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    const existe = usuarios.find((u) => u.email === email);
+    if (existe) {
+      alert("E-mail já cadastrado! Vá para o login.");
+      navigate("/login");
+      return;
+    }
+
+    usuarios.push(novoUsuario);
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+    alert("Cadastro realizado com sucesso!");
+    navigate("/login");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center">Cadastro</h2>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <input {...register("nome", { required: true })} placeholder="Nome" className="border p-2 rounded"/>
-          
-          <input {...register("dataNascimento", { required: true })} type="data" placeholder="Data de Nascimento" className="border p-2 rounded"/>
-          
-          <input {...register("email", { required: true })} type="email" placeholder="E-mail" className="border p-2 rounded"/>
-         
-          <input {...register("senha", { required: true })} type="password" placeholder="Senha" className="border p-2 rounded"/>
-          
-          <select {...register("posicao", { required: true })} className="border p-2 rounded">
-            <option value="">Selecione a posição em campo</option>
-            <option value="Goleiro">Goleiro</option>
-            <option value="Zagueiro">Zagueiro</option>
-            <option value="Lateral">Lateral</option>
-            <option value="Meio-campo">Meio-campo</option>
-            <option value="Atacante">Atacante</option>
-          </select>
+    <div className="min-h-screen bg-[#01183c]">
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+        <h1 className="text-3xl font-bold text-center text-purple-700 mb-6">
+          Cadastro
+        </h1>
+        <form onSubmit={handleCadastro} className="flex flex-col gap-4">
           <input
-            {...register("foto")}
             type="text"
-            placeholder="URL da Foto (opcional)"
-            className="border p-2 rounded"/>
+            placeholder="Nome completo"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            required
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+          />
+          <input
+            type="date"
+            value={dataNascimento}
+            onChange={(e) => setDataNascimento(e.target.value)}
+            required
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+          />
+          <input
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+          />
+          <input
+            type="password"
+            placeholder="Senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            required
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+          />
+
+          <select
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 text-gray-600"
+            required
+          >
+            <option value="" disabled>
+              Selecione o tipo de conta
+            </option>
+            <option value="jogadora">Jogadora</option>
+            <option value="treinador">Treinador</option>
+          </select>
 
           <button
             type="submit"
-            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Cadastrar</button>
-          <button onClick={() => navigate("/")} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Teste</button>
-
-          </form>
-
-        {message && (
-          <p className="text-center text-sm text-red-500 mt-4">{message}</p>
-        )}
+            className="bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition"
+          >
+            Cadastrar
+          </button>
+          <p
+            onClick={() => navigate("/login")}
+            className="text-center text-sm text-gray-500 mt-2 cursor-pointer hover:underline"
+          >
+            Já tem conta? Faça login
+          </p>
+        </form>
       </div>
+    </div>
     </div>
   );
 };
