@@ -1,41 +1,84 @@
-// Carrossel.jsx
-import { useState, useEffect } from "react";
-import fotoDepoimento from "../assets/depoimento.jpg"; // imagem importada
+// src/components/Carrossel.jsx
+import React, { useState, useEffect } from "react";
 
-// Array de depoimentos
+// Importando as imagens dos depoimentos
+import jogadora1 from "../assets/depoimento.jpg";
+import jogadora2 from "../assets/depoimento.jpg";
+import jogadora3 from "../assets/depoimento.jpg";
+import mae1 from "../assets/depoimento.jpg";
+import treinadora1 from "../assets/depoimento.jpg";
+
 const depoimentos = [
-  { nome: "Jogadora 1", texto: "O Passa a Bola mudou minha forma de treinar!", foto: fotoDepoimento },
-  { nome: "Jogadora 2", texto: "Encontrei meu primeiro torneio graças ao site.", foto: fotoDepoimento },
-  { nome: "Jogadora 3", texto: "Ótima plataforma para jovens atletas.", foto: fotoDepoimento },
+  {
+    nome: "Ana Vasconcelos",
+    idade: "",
+    texto: "O Passa a Bola me ajudou a encontrar meu clube ideal e melhorar meu desempenho. Agora sinto que tenho oportunidades reais!",
+    foto: jogadora1,
+  },
+  {
+    nome: "Luísa Pacheco",
+    idade: "",
+    texto: "Adoro participar dos torneios pelo Passa a Bola. É divertido e me motiva a treinar ainda mais.",
+    foto: jogadora2,
+  },
+  {
+    nome: "Camila Nogueira",
+    idade: "",
+    texto: "Os desafios e recompensas da plataforma me inspiram a dar o meu melhor a cada treino!",
+    foto: jogadora3,
+  },
+  {
+    nome: "Mariana Azevedo",
+    idade: "",
+    texto: "Agora acompanho melhor o desenvolvimento da minha filha. O Passa a Bola facilita a vida dos pais e ajuda a manter tudo organizado.",
+    foto: mae1,
+  },
+  {
+    nome: "Carla Almeida",
+    idade: "",
+    texto: "Com a plataforma consigo conhecer novas jogadoras e acompanhar talentos emergentes de forma rápida e prática.",
+    foto: treinadora1,
+  },
 ];
 
-const Carrossel = ({ fundo = "#5A8CA6" }) => {
-  const [indice, setIndice] = useState(0);
+const Carrossel = () => {
+  const [index, setIndex] = useState(0);
 
+  // Muda o depoimento a cada 5 segundos
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndice((prev) => (prev + 1) % depoimentos.length);
-    }, 4000); // muda a cada 4 segundos
-
+      setIndex((prev) => (prev + 1) % depoimentos.length);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="py-16" style={{ backgroundColor: fundo }}>
-      <h3 className="text-4xl md:text-5xl font-bold mb-8 text-center text-white">
-        Depoimentos
-      </h3>
+    <section className="py-16 bg-[#FF6F91] text-white text-center">
+      <h2 className="text-4xl font-bold mb-12">O que elas dizem</h2>
 
-      <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-xl text-center">
+      <div className="max-w-3xl mx-auto p-6 bg-white text-[#14001D] rounded-2xl shadow-2xl transition transform hover:scale-105">
         <img
-          src={depoimentos[indice].foto}
-          alt={depoimentos[indice].nome}
-          className="w-24 h-24 mx-auto rounded-full mb-4 object-cover border-4 border-[#FF6F91]"
+          src={depoimentos[index].foto}
+          alt={depoimentos[index].nome}
+          className="w-16 h-16 rounded-full mx-auto mb-4 object-cover"
         />
-        <p className="text-lg md:text-xl font-semibold mb-2 text-[#003B5C]">
-          "{depoimentos[indice].texto}"
+        <p className="italic text-lg mb-4">"{depoimentos[index].texto}"</p>
+        <p className="font-bold text-[#5a8ca6]">
+          {depoimentos[index].nome}
+          {depoimentos[index].idade ? `, ${depoimentos[index].idade}` : ""}
         </p>
-        <p className="text-sm md:text-base text-gray-700">{depoimentos[indice].nome}</p>
+      </div>
+
+      {/* Pontinhos do carrossel */}
+      <div className="flex justify-center mt-6 gap-2">
+        {depoimentos.map((_, i) => (
+          <span
+            key={i}
+            className={`w-3 h-3 rounded-full transition ${
+              i === index ? "bg-white" : "bg-[#E8E8E8]"
+            }`}
+          ></span>
+        ))}
       </div>
     </section>
   );
