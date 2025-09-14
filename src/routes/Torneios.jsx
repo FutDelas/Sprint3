@@ -1,151 +1,242 @@
 import { useState, useEffect } from "react";
- 
-export default function Torneios({ userEmail }) {
-  const encontrosIniciais = [
+
+export default function Encontros() {
+  const encontrosPadrao = [
     {
       id: 1,
-      nome: "Torneio de Domingo",
-      data: "04/09/2025 - 14:00h",
-      local: "Ginásio Central",
-      encerrado: true,
+      titulo: "Encontro no Estádio Municipal",
+      data: "18/09 às 20h - 23h",
+      local: "Estádio Municipal",
       vagas: 20,
-      inscritos: 20,
+      inscritos: 0,
       participantes: [],
     },
     {
       id: 2,
-      nome: "Jogo Amistoso de Quarta",
-      data: "11/09/2025 - 19:00h",
-      local: "Quadra do Bairro",
-      encerrado: true,
+      titulo: "Encontro no Centro de Treinamento",
+      data: "05/10 às 09h",
+      local: "Centro de Treinamento",
       vagas: 15,
-      inscritos: 15,
+      inscritos: 0,
       participantes: [],
     },
     {
       id: 3,
-      nome: "Desafio de Sábado",
-      data: "18/09/2025 - 16:00h",
-      local: "Arena Passa a Bola",
-      encerrado: false,
+      titulo: "Encontro na Arena",
+      data: "12/10 às 10h",
+      local: "Arena Municipal",
       vagas: 25,
-      inscritos: 10,
-      participantes: [],
-    },
-    {
-      id: 4,
-      nome: "Treino Coletivo de Sexta",
-      data: "25/09/2025 - 18:30h",
-      local: "Quadra Escola Municipal",
-      encerrado: false,
-      vagas: 30,
-      inscritos: 5,
+      inscritos: 0,
       participantes: [],
     },
   ];
- 
-  const [encontros, setEncontros] = useState(() => {
-    const saved = localStorage.getItem("encontros");
-    return saved ? JSON.parse(saved) : encontrosIniciais;
+
+  const [encontros, setEncontros] = useState(encontrosPadrao);
+  const [modalAberto, setModalAberto] = useState(false);
+  const [encontroSelecionado, setEncontroSelecionado] = useState(null);
+  const [form, setForm] = useState({
+    nome: "",
+    idade: "",
+    email: "",
+    whatsapp: "",
+    nivel: "",
   });
- 
+
+  // Carrega dados do localStorage
+  useEffect(() => {
+    try {
+      const salvos = localStorage.getItem("encontros");
+      if (salvos) {
+        setEncontros(JSON.parse(salvos));
+      }
+    } catch {
+      setEncontros(encontrosPadrao);
+    }
+  }, []);
+
+  // Salva alterações
   useEffect(() => {
     localStorage.setItem("encontros", JSON.stringify(encontros));
   }, [encontros]);
- 
-  const confirmarPresenca = (id) => {
+
+  const abrirModal = (encontro) => {
+    setEncontroSelecionado(encontro);
+    setModalAberto(true);
+  };
+
+  const confirmarPresenca = () => {
+    if (!form.nome || !form.email) {
+      alert("Preencha nome e e-mail para confirmar a inscrição.");
+      return;
+    }
+
     setEncontros((prev) =>
-      prev.map((encontro) => {
-        if (
-          !encontro.encerrado &&
-          encontro.inscritos < encontro.vagas &&
-          encontro.id === id &&
-          !encontro.participantes.includes(userEmail)
-        ) {
-          return {
-            ...encontro,
-            inscritos: encontro.inscritos + 1,
-            participantes: [...encontro.participantes, userEmail],
-          };
-        }
-        return encontro;
-      })
+      prev.map((e) =>
+        e.id === encontroSelecionado.id && e.inscritos < e.vagas
+          ? {
+              ...e,
+              inscritos: e.inscritos + 1,
+              participantes: [
+                ...e.participantes,
+                {
+                  nome: form.nome,
+                  idade: form.idade,
+                  email: form.email,
+                  whatsapp: form.whatsapp,
+                  nivel: form.nivel,
+                },
+              ],
+            }
+          : e
+      )
+    );
+
+    setForm({ nome: "", idade: "", email: "", whatsapp: "", nivel: "" });
+    setModalAberto(false);
+  };
+
+  const cancelarPresenca = (encontroId, email) => {
+    setEncontros((prev) =>
+      prev.map((e) =>
+        e.id === encontroId
+          ? {
+              ...e,
+              inscritos: e.inscritos - 1,
+              participantes: e.participantes.filter(
+                (p) => p.email !== email
+              ),
+            }
+          : e
+      )
     );
   };
- 
-  const cancelarPresenca = (nomeEncontro) => {
-    setEncontros((prev) =>
-      prev.map((encontro) => {
-        if (encontro.nome === nomeEncontro) {
-          return {
-            ...encontro,
-            inscritos: encontro.inscritos - 1,
-            participantes: encontro.participantes.filter((email) => email !== userEmail),
-          };
-        }
-        return encontro;
-      })
-    );
-  };
- 
+
   return (
-    <div className="relative min-h-screen bg-blue-800 flex flex-col items-center justify-center p-6">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#001449,#061013)] opacity-90"></div>
- 
-      <div className="relative w-full max-w-6xl z-10 space-y-8">
-        {/* Hero */}
-        <section className="text-center">
-          <h1 className="text-3xl font-bold text-white">Não perca os encontros desse mês!</h1>
-          <p className="mt-2 text-gray-300">
-            Nossos encontros semanais são a chance perfeita para se divertir, praticar e conhecer novas meninas que também amam futebol! Toda semana temos treinos coletivos para todos os níveis. Escolha o encontro que mais combina com você e confirme sua presença para garantir sua vaga!
-          </p>
-        </section>
- 
-        {/* Lista de encontros */}
-        <section>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {encontros.map((encontro) => {
-              const jaInscrito = encontro.participantes.includes(userEmail);
- 
-              const cardClasses = `
-                p-4 border rounded-2xl shadow-lg
-                ${encontro.encerrado ? "bg-gray-400 text-gray-700" : "bg-white text-gray-800"}
-              `;
- 
-              return (
-                <div key={encontro.id} className={cardClasses}>
-                  <h3 className="text-lg font-bold text-[#14001dff]">{encontro.nome}</h3>
-                  <p>🗓 {encontro.data}</p>
-                  <p>📍 {encontro.local}</p>
-                  <p>📊 Vagas: {encontro.inscritos} / {encontro.vagas}</p>
- 
-                  <button
-                    onClick={() =>
-                      jaInscrito ? cancelarPresenca(encontro.nome) : confirmarPresenca(encontro.id)
-                    }
-                    disabled={encontro.encerrado || (!jaInscrito && encontro.inscritos >= encontro.vagas)}
-                    className={`mt-3 w-full px-4 py-2 rounded-xl text-white transition ${
-                      encontro.encerrado || (!jaInscrito && encontro.inscritos >= encontro.vagas)
-                        ? "bg-gray-600 cursor-not-allowed"
-                        : jaInscrito
-                        ? "bg-red-500 hover:bg-red-600"
-                        : "bg-[#14001dff] hover:bg-yellow-600"
-                    }`}
-                  >
-                    {encontro.encerrado || (!jaInscrito && encontro.inscritos >= encontro.vagas)
-                      ? "Inscrições Encerradas"
-                      : jaInscrito
-                      ? "Cancelar Inscrição"
-                      : "Confirmar Presença"}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+    <div className="min-h-screen bg-[#F4F0F8] p-6">
+      <h1 className="text-3xl font-bold text-center text-[#14001dff] mb-6">
+        Encontros FutDelas
+      </h1>
+
+      <p className="text-center max-w-xl mx-auto text-lg mb-8">
+        Os <strong>Encontros FutDelas</strong> são para{" "}
+        <strong>mulheres de todas as idades</strong> que querem jogar futebol,
+        se divertir e aprender juntas. Escolha um encontro abaixo e confirme
+        sua presença!
+      </p>
+
+      <div className="grid md:grid-cols-3 gap-6">
+        {encontros.map((encontro) => {
+          const jaInscrito = encontro.participantes.some(
+            (p) => p.email === form.email
+          );
+          const lotado = encontro.inscritos >= encontro.vagas;
+
+          return (
+            <div
+              key={encontro.id}
+              className="bg-white rounded-2xl shadow-md p-4 flex flex-col items-center text-center"
+            >
+              <h2 className="text-xl font-semibold">{encontro.titulo}</h2>
+              <p className="text-gray-600">{encontro.data}</p>
+              <p className="text-gray-600">{encontro.local}</p>
+              <p className="mt-2 text-sm">
+                Vagas: {encontro.inscritos}/{encontro.vagas}
+              </p>
+
+              <button
+                onClick={() =>
+                  jaInscrito
+                    ? cancelarPresenca(encontro.id, form.email)
+                    : abrirModal(encontro)
+                }
+                className={`mt-4 px-4 py-2 rounded-xl ${
+                  lotado && !jaInscrito
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : jaInscrito
+                    ? "bg-red-500 hover:bg-red-600 text-white"
+                    : "bg-pink-600 hover:bg-pink-700 text-white"
+                }`}
+                disabled={lotado && !jaInscrito}
+              >
+                {jaInscrito
+                  ? "Cancelar inscrição"
+                  : lotado
+                  ? "Lotado"
+                  : "Quero Participar"}
+              </button>
+            </div>
+          );
+        })}
       </div>
+
+      {/* Modal de inscrição */}
+      {modalAberto && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
+            <h2 className="text-xl font-bold text-[#14001dff] mb-4">
+              Ficha de Inscrição
+            </h2>
+
+            <input
+              type="text"
+              placeholder="Nome completo"
+              value={form.nome}
+              onChange={(e) => setForm({ ...form, nome: e.target.value })}
+              className="w-full mb-3 p-2 border rounded"
+            />
+
+            <input
+              type="number"
+              placeholder="Idade"
+              value={form.idade}
+              onChange={(e) => setForm({ ...form, idade: e.target.value })}
+              className="w-full mb-3 p-2 border rounded"
+            />
+
+            <input
+              type="email"
+              placeholder="Seu e-mail"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="w-full mb-3 p-2 border rounded"
+            />
+
+            <input
+              type="tel"
+              placeholder="WhatsApp (opcional)"
+              value={form.whatsapp}
+              onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+              className="w-full mb-3 p-2 border rounded"
+            />
+
+            <select
+              value={form.nivel}
+              onChange={(e) => setForm({ ...form, nivel: e.target.value })}
+              className="w-full mb-3 p-2 border rounded"
+            >
+              <option value="">Nível de jogo (opcional)</option>
+              <option value="iniciante">Iniciante</option>
+              <option value="intermediaria">Intermediária</option>
+              <option value="avancada">Avançada</option>
+            </select>
+
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={() => setModalAberto(false)}
+                className="px-4 py-2 rounded-xl bg-gray-300 hover:bg-gray-400"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmarPresenca}
+                className="px-4 py-2 rounded-xl bg-pink-600 text-white hover:bg-pink-700"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
- 
- 

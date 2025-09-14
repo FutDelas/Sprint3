@@ -2,6 +2,8 @@
 import { useNavigate } from "react-router-dom";
 import Carrossel from "../components/Carrossel";
 import JogosNaTv from "../components/Jogosnatv";
+import { MdLocationOn, MdDateRange, MdAccessTime } from "react-icons/md";
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -63,35 +65,55 @@ const Home = () => {
         </div>
       </section>
 
-      {/* SEÇÃO DE TORNEIOS */}
-      <section className="py-16 text-center">
-        <h3 className="text-4xl md:text-5xl font-bold mb-12 text-[#14001D]">Próximos Torneios</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="bg-white text-[#14001D] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:scale-105 border-t-4 border-[#FF6F91]">
-            <h4 className="font-bold text-xl mb-2">Torneio Municipal </h4>
-            <p className="text-[#5a8ca6]">Estádio Municipal</p>
-            <p className="text-gray-500 text-sm">30/09 às 14h</p>
-          </div>
-          <div className="bg-white text-[#14001D] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:scale-105 border-t-4 border-[#FF6F91]">
-            <h4 className="font-bold text-xl mb-2">Copa Regional </h4>
-            <p className="text-[#5a8ca6]">Centro de Treinamento</p>
-            <p className="text-gray-500 text-sm">05/10 às 09h</p>
-          </div>
-          <div className="bg-white text-[#14001D] p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:scale-105 border-t-4 border-[#FF6F91]">
-            <h4 className="font-bold text-xl mb-2">Torneio Aberto Feminino </h4>
-            <p className="text-[#5a8ca6]">Neo Química Arena</p>
-            <p className="text-gray-500 text-sm">12/10 às 10h</p>
-          </div>
-        </div>
-        <div className="text-center mt-10">
-          <button
-            onClick={() => navigate("/torneios")}
-            className="bg-[#FF6F91] text-white py-3 px-6 rounded-full hover:bg-[#E65A7F] hover:scale-105 transition"
-          >
-            🏆 Ver Todos os Torneios
-          </button>
-        </div>
-      </section>
+
+
+{/* SEÇÃO DE TORNEIOS */}
+<section className="py-16 max-w-6xl mx-auto px-4">
+  <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+
+    {/* Texto motivador à esquerda */}
+    <div className="md:w-1/2 flex flex-col items-start">
+      <h3 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+        Encontro FutDelas
+      </h3>
+      <p className="text-xl md:text-1xl text-gray-900 mb-6">
+        São momentos especiais para mulheres de todas as idades e níveis se divertirem,
+        praticarem futebol e conhecerem novas amigas que também amam o esporte. Venha jogar, aprender e celebrar o
+        futebol feminino com a gente!
+      </p>
+      <button
+        onClick={() => navigate("/torneios")}
+        className="bg-[#FF6F91] text-white py-3 px-6 rounded-full hover:bg-[#E65A7F] hover:scale-105 transition"
+      >
+        Se inscreva!
+      </button>
+    </div>
+
+    {/* Card do próximo encontro à direita */}
+    <div className="md:w-1/2 flex flex-col items-center">
+      <div className="bg-white text-[#1a1a1a] p-8 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:scale-105 border-t-4 border-[#FF6F91] flex flex-col justify-center h-full w-full">
+        <h4 className="font-bold text-2xl mb-4">Próximo Encontro</h4>
+        
+        {/* Local */}
+        <p className="text-[#2d2d2d] text-lg mb-2 flex items-center gap-2">
+          <MdLocationOn className="text-pink-500" /> Campo de Bairro
+        </p>
+
+        {/* Data */}
+        <p className="text-gray-700 text-lg mb-2 flex items-center gap-2">
+          <MdDateRange className="text-pink-500" /> 18/09
+        </p>
+
+        {/* Horário */}
+        <p className="text-gray-700 text-lg flex items-center gap-2">
+          <MdAccessTime className="text-pink-500" /> 20:00 - 23:00
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
       {/* CARROSSEL DE DEPOIMENTOS */}
       <Carrossel fundo="#FF6F91" />
@@ -152,7 +174,7 @@ const Home = () => {
 
       {/* SEÇÃO CANAL DOS PAIS */}
       <section className="py-16 bg-[#FF6F91] text-white text-center">
-        <h3 className="text-4xl md:text-5xl font-bold mb-6">👨‍👩 Canal dos Pais</h3>
+        <h3 className="text-4xl md:text-5xl font-bold mb-6"> Canal dos Pais</h3>
         <p className="max-w-3xl mx-auto text-lg md:text-xl mb-8">
           Um espaço dedicado aos pais e responsáveis acompanharem o desenvolvimento das jovens jogadoras, receber dicas de segurança, participar de decisões e acompanhar torneios e recompensas.
         </p>

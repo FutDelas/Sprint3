@@ -31,6 +31,13 @@ const Nav = () => {
           >
             Login
           </Link>
+
+          <Link
+            to="/cadastro-organizador"
+            className="hover:text-yellow-300 font-bold transition-colors cursor-pointer"
+          >
+             Painel dos organizadores
+          </Link>
         </div>
       </div>
     </nav>
