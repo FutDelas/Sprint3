@@ -10,6 +10,7 @@ import Login from './routes/Login'
 import CadastroOrganizador from './routes/CadastroOrganizador'
 import LoginOrganizador from './routes/LoginOrganizador'
 import CanalDosPaiseResponsaveis from "./routes/CanalDePaiseResponsaveis"
+import Perfil from './routes/Perfil'
 
 
 function App() {
@@ -37,6 +38,8 @@ function App() {
         <Route path="/login-organizador" element={<LoginOrganizador/>}/>
 
         <Route path="/canal-de-pais-e-responsaveis" element={<CanalDosPaiseResponsaveis/>}/>
+
+        <Route path="/perfil" element={<Perfil/>}/>
 
       </Routes>
     </main>
