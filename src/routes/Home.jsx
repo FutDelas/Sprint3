@@ -36,7 +36,7 @@ const Home = () => {
           </button>
 
           <button
-            onClick={() => navigate("/torneios")}
+            onClick={() => navigate("/encontros")}
             className="bg-[#FF6F91] text-white font-bold py-3 px-6 rounded-full hover:bg-[#E65A7F] transition transform hover:scale-105"
           >
              Torneios
@@ -82,7 +82,7 @@ const Home = () => {
         futebol feminino com a gente!
       </p>
       <button
-        onClick={() => navigate("/torneios")}
+        onClick={() => navigate("/encontros")}
         className="bg-[#FF6F91] text-white py-3 px-6 rounded-full hover:bg-[#E65A7F] hover:scale-105 transition"
       >
         Se inscreva!

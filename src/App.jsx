@@ -5,7 +5,7 @@ import Home from './routes/Home'
 import Cadastro from './routes/Cadastro'
 import Error from './routes/Error'
 import Mapa from './routes/Mapa'
-import Torneios from './routes/Torneios'
+import Encontros from './routes/Encontros'
 import Login from './routes/Login'
 import CadastroOrganizador from './routes/CadastroOrganizador'
 import LoginOrganizador from './routes/LoginOrganizador'
@@ -29,7 +29,7 @@ function App() {
 
         <Route path="/mapa" element={<Mapa/>}/>
 
-        <Route path="/torneios" element={<Torneios/>}/>
+        <Route path="/encontros" element={<Encontros/>}/>
 
         <Route path="/login" element={<Login/>}/>
 
