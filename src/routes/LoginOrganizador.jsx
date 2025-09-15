@@ -16,7 +16,7 @@ const LoginOrganizador = () => {
 
     if (organizador) {
       localStorage.setItem("organizadorLogado", JSON.stringify(organizador));
-      navigate("/perfil-organizador");
+      navigate("/perfil");
     } else {
       alert("E-mail ou senha inválidos!");
     }
