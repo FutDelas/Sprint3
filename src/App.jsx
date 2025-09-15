@@ -11,7 +11,7 @@ import CadastroOrganizador from './routes/CadastroOrganizador'
 import LoginOrganizador from './routes/LoginOrganizador'
 import CanalDosPaiseResponsaveis from "./routes/CanalDePaiseResponsaveis"
 import Perfil from './routes/Perfil'
-
+import Recompensas from './routes/Recompensas'
 
 function App() {
   
@@ -40,6 +40,8 @@ function App() {
         <Route path="/canal-de-pais-e-responsaveis" element={<CanalDosPaiseResponsaveis/>}/>
 
         <Route path="/perfil" element={<Perfil/>}/>
+
+        <Route path="/recompensas" element={<Recompensas/>}/>
 
       </Routes>
     </main>
