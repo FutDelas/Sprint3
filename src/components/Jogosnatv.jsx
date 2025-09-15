@@ -41,8 +41,8 @@ const JogosNaTv = () => {
             className="bg-white shadow-lg rounded-2xl p-6 text-left flex flex-col md:flex-row md:items-center md:justify-between hover:shadow-2xl transition"
           >
             <div>
-              <p className="text-lg font-semibold text-[#14001D]">{jogo.times}</p>
-              <div className="flex items-center gap-4 text-[#4B4453] mt-1">
+              <p className="text-lg font-semibold text-[#F06292]">{jogo.times}</p>
+              <div className="flex items-center gap-4 text-[#333333] mt-1">
                 <span className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" /> {jogo.data}
                 </span>
@@ -52,7 +52,7 @@ const JogosNaTv = () => {
               </div>
             </div>
             <div className="mt-4 md:mt-0">
-              <span className="bg-[#FF6F91] text-white px-4 py-2 rounded-full text-sm font-bold">
+              <span className="bg-[#5A2A8C] text-white px-4 py-2 rounded-full text-sm font-bold">
                 {jogo.canal}
               </span>
             </div>

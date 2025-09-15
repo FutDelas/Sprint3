@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from "react";
 
 // Importando as imagens dos depoimentos
-import jogadora1 from "../assets/depoimento.jpg";
-import jogadora2 from "../assets/depoimento.jpg";
+import jogadora1 from "../assets/ana.jpg";
+import jogadora2 from "../assets/luisa.jpg";
 import jogadora3 from "../assets/depoimento.jpg";
-import mae1 from "../assets/depoimento.jpg";
-import treinadora1 from "../assets/depoimento.jpg";
+import mae1 from "../assets/mae.jpg";
+import treinadora1 from "../assets/treinadora.jpg";
 
 const depoimentos = [
   {
@@ -56,14 +56,14 @@ const Carrossel = () => {
     <section className="py-16 bg-[#FF6F91] text-white text-center">
       <h2 className="text-4xl font-bold mb-12">O que elas dizem</h2>
 
-      <div className="max-w-3xl mx-auto p-6 bg-white text-[#14001D] rounded-2xl shadow-2xl transition transform hover:scale-105">
+      <div className="max-w-3xl mx-auto p-6 bg-white text-[#333333] rounded-2xl shadow-2xl transition transform hover:scale-105">
         <img
           src={depoimentos[index].foto}
           alt={depoimentos[index].nome}
           className="w-16 h-16 rounded-full mx-auto mb-4 object-cover"
         />
         <p className="italic text-lg mb-4">"{depoimentos[index].texto}"</p>
-        <p className="font-bold text-[#5a8ca6]">
+        <p className="font-bold text-[#5A2A8C]">
           {depoimentos[index].nome}
           {depoimentos[index].idade ? `, ${depoimentos[index].idade}` : ""}
         </p>
