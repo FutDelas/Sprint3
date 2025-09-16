@@ -61,22 +61,22 @@ export default function Recompensas() {
   };
 
   return (
-    <div className="min-h-screen bg-[#01183c] flex justify-center items-center py-10">
+    <div className="min-h-screen bg-[#0A192F] flex justify-center items-center py-10">
 
-      <div className="bg-indigo-200 shadow-2xl rounded-2xl p-8 w-full max-w-2xl flex flex-col items-center">
+      <div className="bg-[#FAD1DF] shadow-2xl rounded-2xl p-8 w-full max-w-2xl flex flex-col items-center">
         
-        <h1 className="text-3xl font-bold mb-6 text-[#01183c]">Recompensas</h1>
+        <h1 className="text-3xl font-bold mb-6 text-[#0A192F]">Recompensas</h1>
         
         <img src={medalha} alt="medalha" className="w-16 h-16 mb-6" />
         
-        <p className="mb-6 text-lg">Seus pontos: <strong>{pontos}</strong></p>
+        <p className="mb-6 text-lg text-[#0A192F]">Seus pontos: <strong>{pontos}</strong></p>
 
         {/* QUIZ 1 */}
-        <div className="bg-rose-50 shadow-md p-6 rounded-xl w-full mb-6">
-          <h2 className="text-xl font-semibold mb-4">Quiz 1 - (50 pontos)</h2>
+        <div className="bg-white shadow-md p-6 rounded-xl w-full mb-6">
+          <h2 className="text-xl font-semibold mb-4 text-[#0A192F]">Quiz 1 - (50 pontos)</h2>
           {perguntasQuiz1.map((q, i) => (
             <div key={i} className="mb-4">
-              <p>{q.pergunta}</p>
+              <p className="text-[#0A192F]">{q.pergunta}</p>
               <input
                 type="text"
                 value={respostasQuiz1[i]}
@@ -85,7 +85,7 @@ export default function Recompensas() {
                   novasRespostas[i] = e.target.value;
                   setRespostasQuiz1(novasRespostas);
                 }}
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded focus:outline-[#F06292]"
                 disabled={quiz1Concluido}
               />
             </div>
@@ -94,7 +94,7 @@ export default function Recompensas() {
             onClick={verificarQuiz1}
             disabled={quiz1Concluido}
             className={`px-4 py-2 rounded text-white ${
-              quiz1Concluido ? "bg-gray-400" : "bg-indigo-400 hover:bg-indigo-700"
+              quiz1Concluido ? "bg-gray-400" : "bg-[#F06292] hover:bg-[#E65A7F]"
             }`}
           >
             Finalizar Quiz
@@ -102,11 +102,11 @@ export default function Recompensas() {
         </div>
 
         {/* QUIZ 2 */}
-        <div className="bg-rose-50 shadow-md p-6 rounded-xl w-full mb-6">
-          <h2 className="text-xl font-semibold mb-4">Quiz 2 - (75 pontos)</h2>
+        <div className="bg-white shadow-md p-6 rounded-xl w-full mb-6">
+          <h2 className="text-xl font-semibold mb-4 text-[#0A192F]">Quiz 2 - (75 pontos)</h2>
           {perguntasQuiz2.map((q, i) => (
             <div key={i} className="mb-4">
-              <p>{q.pergunta}</p>
+              <p className="text-[#0A192F]">{q.pergunta}</p>
               <input
                 type="text"
                 value={respostasQuiz2[i]}
@@ -115,7 +115,7 @@ export default function Recompensas() {
                   novasRespostas[i] = e.target.value;
                   setRespostasQuiz2(novasRespostas);
                 }}
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded focus:outline-[#F06292]"
                 disabled={quiz2Concluido}
               />
             </div>
@@ -124,7 +124,7 @@ export default function Recompensas() {
             onClick={verificarQuiz2}
             disabled={quiz2Concluido}
             className={`px-4 py-2 rounded text-white ${
-              quiz2Concluido ? "bg-gray-400" : "bg-indigo-400 hover:bg-indigo-700"
+              quiz2Concluido ? "bg-gray-400" : "bg-[#F06292] hover:bg-[#E65A7F]"
             }`}
           >
             Finalizar Quiz

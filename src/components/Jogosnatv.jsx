@@ -52,7 +52,7 @@ const JogosNaTv = () => {
               </div>
             </div>
             <div className="mt-4 md:mt-0">
-              <span className="bg-[#5A2A8C] text-white px-4 py-2 rounded-full text-sm font-bold">
+              <span className="bg-[#0A192F] text-white px-4 py-2 rounded-full text-sm font-bold">
                 {jogo.canal}
               </span>
             </div>

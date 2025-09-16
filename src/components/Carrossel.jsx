@@ -53,7 +53,7 @@ const Carrossel = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-[#FF6F91] text-white text-center">
+    <section className="py-16 bg-[#F06292] text-white text-center">
       <h2 className="text-4xl font-bold mb-12">O que elas dizem</h2>
 
       <div className="max-w-3xl mx-auto p-6 bg-white text-[#333333] rounded-2xl shadow-2xl transition transform hover:scale-105">
@@ -63,7 +63,7 @@ const Carrossel = () => {
           className="w-16 h-16 rounded-full mx-auto mb-4 object-cover"
         />
         <p className="italic text-lg mb-4">"{depoimentos[index].texto}"</p>
-        <p className="font-bold text-[#5A2A8C]">
+        <p className="font-bold text-[#0A192F]">
           {depoimentos[index].nome}
           {depoimentos[index].idade ? `, ${depoimentos[index].idade}` : ""}
         </p>

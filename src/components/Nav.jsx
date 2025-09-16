@@ -14,27 +14,21 @@ const Nav = () => {
         <div className="space-x-6">
           <Link
             to="/"
-            className="hover:text-yellow-300 font-bold transition-colors cursor-pointer"
+            className="hover:text-[#F06292] font-bold transition-colors cursor-pointer"
           >
             Home
-          </Link>
-          <Link
-            to="/cadastro"
-            className="hover:text-yellow-300 font-bold transition-colors cursor-pointer"
-          >
-            Cadastro
           </Link>
 
           <Link
             to="/login"
-            className="hover:text-yellow-300 font-bold transition-colors cursor-pointer"
+            className="hover:text-[#F06292] font-bold transition-colors cursor-pointer"
           >
             Login
           </Link>
 
           <Link
             to="/cadastro-organizador"
-            className="hover:text-yellow-300 font-bold transition-colors cursor-pointer"
+            className="hover:text-[#F06292] font-bold transition-colors cursor-pointer"
           >
              Painel dos organizadores
           </Link>

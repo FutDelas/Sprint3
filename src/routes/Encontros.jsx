@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Calendar, Clock, MapPin, Users, X } from "lucide-react";
 
-const fotosExemplo = [
-  "https://via.placeholder.com/150?text=Foto+1",
-  "https://via.placeholder.com/150?text=Foto+2",
-  "https://via.placeholder.com/150?text=Foto+3",
-];
+import encontro1 from "../assets/encontro1.jpg";
+import encontro2 from "../assets/encontro2.jpg";
+import encontro3 from "../assets/encontro3.jpg";
+
+const fotosExemplo = [encontro1, encontro2, encontro3];
 
 export default function Encontros() {
   const encontrosPadrao = [
@@ -18,12 +18,8 @@ export default function Encontros() {
       vagas: 44,
       inscritos: 44,
       status: "passado",
-      placar: "Time A 3 x 2 Time B",
+      resultados: ["Time A 3 x 2 Time B", "Time C 1 x 1 Time D"],
       fotos: fotosExemplo,
-      depoimentos: [
-        "Amei jogar com todas, quero repetir!",
-        "Muito divertido e motivador, aprendi bastante.",
-      ],
       participantes: [],
     },
     {
@@ -35,12 +31,8 @@ export default function Encontros() {
       vagas: 44,
       inscritos: 44,
       status: "passado",
-      placar: "Time C 1 x 1 Time D",
+      resultados: ["Time E 2 x 0 Time F", "Time G 1 x 3 Time H"],
       fotos: fotosExemplo,
-      depoimentos: [
-        "Jogada incrível do nosso time!",
-        "Mais um encontro inesquecível!",
-      ],
       participantes: [],
     },
     {
@@ -141,12 +133,12 @@ export default function Encontros() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F0F8] p-6">
-      <h1 className="text-3xl font-bold text-center text-[#14001dff] mb-6">
+    <div className="min-h-screen bg-[#0A192F] p-6">
+      <h1 className="text-3xl font-bold text-center text-[#F06292] mb-6">
         Encontros deste Mês
       </h1>
 
-      <p className="text-center max-w-xl mx-auto text-lg mb-8">
+      <p className="text-center max-w-xl mx-auto text-lg mb-8 text-white">
         Toda <strong>quinta-feira</strong> nos reunimos para jogar futebol,
         se divertir e aprender juntas. Confira os encontros abaixo!
       </p>
@@ -159,28 +151,23 @@ export default function Encontros() {
           const lotado = encontro.inscritos >= encontro.vagas;
 
           // Estilos por status
-          let bgCard = "bg-pink-50";
-          let borderCard = "border border-pink-300";
-          let tituloCor = "text-pink-700";
-          let botaoEstilo = "bg-pink-600 hover:bg-pink-700 text-white";
-          let textIconColor = "text-gray-700";
+          let bgCard = "bg-[#FAD1DF]";
+          let tituloCor = "text-[#0A192F]";
+          let botaoEstilo = "bg-[#F06292] text-white hover:bg-[#E65A7F]";
+          let textIconColor = "text-[#0A192F]";
           let botaoDisabled = false;
 
           if (encontro.status === "passado") {
-            bgCard = "bg-pink-600";
-            borderCard = "border border-pink-700";
-            tituloCor = "text-white";
-            botaoEstilo = "bg-white text-pink-700 hover:bg-gray-100";
-            textIconColor = "text-white";
+            botaoEstilo = "bg-[#0A192F] text-white hover:bg-[#1A2B4D]";
           } else if (encontro.status === "em_breve") {
-            botaoEstilo = "bg-gray-300 text-gray-700 cursor-not-allowed";
             botaoDisabled = true;
+            botaoEstilo = "bg-white text-[#0A192F] cursor-default";
           }
 
           return (
             <div
               key={encontro.id}
-              className={`${bgCard} ${borderCard} rounded-2xl shadow-lg p-6 flex flex-col text-left transition hover:shadow-2xl`}
+              className={`${bgCard} rounded-2xl shadow-lg p-6 flex flex-col text-left transition hover:shadow-2xl`}
             >
               <h2 className={`text-xl font-bold mb-4 ${tituloCor}`}>
                 {encontro.titulo}
@@ -211,19 +198,21 @@ export default function Encontros() {
                 onClick={() =>
                   jaInscrito
                     ? cancelarPresenca(encontro.id, form.email)
-                    : encontro.status === "passado" || lotado || encontro.status === "em_breve"
+                    : encontro.status === "passado" || lotado
                     ? abrirVisualizacao(encontro)
+                    : encontro.status === "em_breve"
+                    ? null
                     : abrirModal(encontro)
                 }
-                className={`mt-auto px-5 py-2 rounded-xl font-medium shadow-md w-full transition ${botaoEstilo}`}
                 disabled={botaoDisabled}
+                className={`mt-auto px-5 py-2 rounded-xl font-medium shadow-md w-full transition ${botaoEstilo}`}
               >
-                {jaInscrito
+                {encontro.status === "em_breve"
+                  ? "Em Breve"
+                  : jaInscrito
                   ? "Cancelar inscrição"
                   : encontro.status === "passado"
                   ? "Veja como foi"
-                  : encontro.status === "em_breve"
-                  ? "Em breve"
                   : "Quero Participar"}
               </button>
             </div>
@@ -235,7 +224,7 @@ export default function Encontros() {
       {modalAberto && encontroSelecionado && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
-            <h2 className="text-xl font-bold text-[#14001dff] mb-4">
+            <h2 className="text-xl font-bold text-[#0A192F] mb-4">
               Ficha de Inscrição
             </h2>
 
@@ -281,13 +270,13 @@ export default function Encontros() {
             <div className="flex justify-between mt-4">
               <button
                 onClick={() => setModalAberto(false)}
-                className="px-4 py-2 rounded-xl bg-pink-100 text-pink-700 hover:bg-pink-200"
+                className="px-4 py-2 rounded-xl bg-[#0A192F] text-white hover:bg-[#14233C]"
               >
                 Fechar
               </button>
               <button
                 onClick={confirmarPresenca}
-                className="px-4 py-2 rounded-xl bg-pink-600 text-white hover:bg-pink-700"
+                className="px-4 py-2 rounded-xl bg-[#F06292] text-white hover:bg-[#E65A7F]"
               >
                 Confirmar
               </button>
@@ -296,10 +285,10 @@ export default function Encontros() {
         </div>
       )}
 
-      {/* Modal "Veja como foi" */}
+      {/* Modal "Veja como foi" atualizado */}
       {visualizacaoAberta && encontroSelecionado && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-pink-600 text-white p-6 rounded-2xl shadow-lg w-full max-w-md overflow-y-auto max-h-[90vh]">
+          <div className="bg-[#0A192F] text-white p-6 rounded-2xl shadow-lg w-full max-w-md overflow-y-auto max-h-[90vh]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">{encontroSelecionado.titulo}</h2>
               <button onClick={() => setVisualizacaoAberta(false)}>
@@ -307,16 +296,17 @@ export default function Encontros() {
               </button>
             </div>
 
-            {encontroSelecionado.placar && (
-              <p className="font-semibold mb-3">{encontroSelecionado.placar}</p>
+            {/* Resultados de jogos */}
+            {encontroSelecionado.resultados && (
+              <div className="mb-3">
+                <h3 className="font-semibold mb-2">Resultados:</h3>
+                <ul className="list-disc list-inside">
+                  {encontroSelecionado.resultados.map((r, i) => (
+                    <li key={i}>{r}</li>
+                  ))}
+                </ul>
+              </div>
             )}
-
-            <h3 className="font-semibold mb-2">Depoimentos:</h3>
-            <ul className="list-disc list-inside mb-3">
-              {(encontroSelecionado.depoimentos || []).map((d, i) => (
-                <li key={i}>{d}</li>
-              ))}
-            </ul>
 
             <h3 className="font-semibold mb-2">Fotos:</h3>
             <div className="grid grid-cols-3 gap-2">
@@ -327,7 +317,7 @@ export default function Encontros() {
 
             <button
               onClick={() => setVisualizacaoAberta(false)}
-              className="mt-4 px-4 py-2 rounded-xl bg-pink-100 text-pink-700 hover:bg-pink-200"
+              className="mt-4 px-4 py-2 rounded-xl bg-[#FAD1DF] text-[#0A192F] hover:bg-[#F9C7D8]"
             >
               Fechar
             </button>
