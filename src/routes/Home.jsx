@@ -107,7 +107,7 @@ const Home = () => {
             <div className="p-8 rounded-xl shadow-lg transition transform hover:scale-105 border-t-4 flex flex-col justify-center h-full w-full" 
                  style={{ backgroundColor: "#E0E4E8", color: "#0A192F", borderColor: "#F06292" }}>
               <h4 className="font-bold text-2xl mb-4">Próximo Encontro</h4>
-              <p className="text-lg mb-2 flex items-center gap-2" style={{ color: "#1E3A5F" }}><MdLocationOn /> Campo de Bairro</p>
+              <p className="text-lg mb-2 flex items-center gap-2" style={{ color: "#1E3A5F" }}><MdLocationOn /> Av. dos Campeões, 45 – Centro</p>
               <p className="text-lg mb-2 flex items-center gap-2" style={{ color: "#1E3A5F" }}><MdDateRange /> 18/09</p>
               <p className="text-lg flex items-center gap-2" style={{ color: "#1E3A5F" }}><MdAccessTime /> 20:00 - 23:00</p>
             </div>
