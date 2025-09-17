@@ -12,6 +12,7 @@ import LoginOrganizador from './routes/LoginOrganizador'
 import CanalDosPaiseResponsaveis from "./routes/CanalDePaiseResponsaveis"
 import Perfil from './routes/Perfil'
 import Recompensas from './routes/Recompensas'
+import Escolinhas from "./routes/Escolinhas";
 
 function App() {
   
@@ -42,6 +43,8 @@ function App() {
         <Route path="/perfil" element={<Perfil/>}/>
 
         <Route path="/recompensas" element={<Recompensas/>}/>
+
+        <Route path="/escolinhas" element={<Escolinhas />} />
 
       </Routes>
     </main>

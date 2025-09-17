@@ -115,6 +115,56 @@ const Home = () => {
         </div>
       </section>
 
+            {/* SEÇÃO DE ESCOLINHAS */}
+      <section className="py-16 text-center" style={{ backgroundColor: "#E0E4E8", color: "#0A192F" }}>
+        <h3 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: "#F06292" }}>
+          Escolinhas de Futebol
+        </h3>
+        <p className="max-w-3xl mx-auto mb-10 text-lg">
+          Conheça nossas escolinhas parceiras e dê o primeiro passo para transformar seu sonho
+          em realidade. Escolha a mais próxima de você e comece a treinar!
+        </p>
+
+        {/* GRID DE CARDS */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+          {/* Card 1 */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-2xl transition transform hover:scale-105 border-l-4 border-[#F06292]">
+            <h4 className="text-xl font-bold mb-2" style={{ color: "#F06292" }}>Escolinha Bola de Ouro</h4>
+            <p className="mb-1">📍 Centro - São Paulo</p>
+            <p className="mb-1">👧 Faixa etária: 8 a 15 anos</p>
+            <p className="mb-1">⚽ Foco: Formação de base</p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-2xl transition transform hover:scale-105 border-l-4 border-[#F06292]">
+            <h4 className="text-xl font-bold mb-2" style={{ color: "#F06292" }}>Academia Estrelas</h4>
+            <p className="mb-1">📍 Vila Olímpica - Rio de Janeiro</p>
+            <p className="mb-1">👧 Faixa etária: 10 a 18 anos</p>
+            <p className="mb-1">🏆 Foco: Desenvolvimento competitivo</p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 text-left hover:shadow-2xl transition transform hover:scale-105 border-l-4 border-[#F06292]">
+            <h4 className="text-xl font-bold mb-2" style={{ color: "#F06292" }}>Futuro Feminino</h4>
+            <p className="mb-1">📍 Bairro Industrial - Belo Horizonte</p>
+            <p className="mb-1">👧 Faixa etária: 6 a 14 anos</p>
+            <p className="mb-1">💪 Foco: Iniciação esportiva</p>
+          </div>
+        </div>
+
+        {/* BOTÃO VER MAIS */}
+        <div className="mt-10">
+          <button
+            onClick={() => navigate("/escolinhas")}
+            className="py-3 px-6 rounded-full transition transform hover:scale-105"
+            style={{ backgroundColor: "#F06292", color: "#FFFFFF" }}
+          >
+            Ver Todas as Escolinhas
+          </button>
+        </div>
+      </section>
+
+
       {/* SEÇÃO DE RECOMPENSAS */}
       <section className="py-16 text-center" style={{ backgroundColor: "#F06292", color: "#FFFFFF" }}>
         <div className="flex flex-col items-center">
