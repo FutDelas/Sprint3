@@ -1,238 +1,187 @@
 // src/pages/Escolinhas.jsx
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Escolinhas = () => {
-  const navigate = useNavigate();
-  const [busca, setBusca] = useState("");
+  const [pagina, setPagina] = useState(0);
   const [filtroFaixa, setFiltroFaixa] = useState("");
+  const [filtroLocal, setFiltroLocal] = useState("");
+  const [filtroAvaliacao, setFiltroAvaliacao] = useState("");
+  const [filtroDias, setFiltroDias] = useState("");
+  const [filtroNivel, setFiltroNivel] = useState("");
   const [modalAberto, setModalAberto] = useState(false);
   const [escolinhaSelecionada, setEscolinhaSelecionada] = useState("");
-
-  const [formData, setFormData] = useState({
-    nome: "",
-    idade: "",
-    email: "",
-    telefone: "",
-  });
-
-  const escolinhas = [
-    {
-      nome: "Escolinha Bola de Ouro",
-      local: "Centro - São Paulo",
-      faixa: "8 a 15 anos",
-      dias: "Segunda e Quarta",
-      horario: "18h - 19h30",
-      fotos: ["https://source.unsplash.com/400x250/?soccer", "https://source.unsplash.com/400x250/?football-training"],
-    },
-    {
-      nome: "Academia Estrelas",
-      local: "Vila Olímpica - Rio de Janeiro",
-      faixa: "10 a 18 anos",
-      dias: "Terça e Quinta",
-      horario: "16h - 17h30",
-      fotos: ["https://source.unsplash.com/400x250/?soccer-girls", "https://source.unsplash.com/400x250/?soccer-field"],
-    },
-    {
-      nome: "Futuro Feminino",
-      local: "Bairro Industrial - Belo Horizonte",
-      faixa: "6 a 14 anos",
-      dias: "Sábado",
-      horario: "09h - 11h",
-      fotos: ["https://source.unsplash.com/400x250/?soccer-training", "https://source.unsplash.com/400x250/?football"],
-    },
-    {
-      nome: "Chuteiras de Ouro",
-      local: "Zona Sul - São Paulo",
-      faixa: "7 a 16 anos",
-      dias: "Segunda, Quarta e Sexta",
-      horario: "17h - 18h30",
-      fotos: ["https://source.unsplash.com/400x250/?soccer-kids", "https://source.unsplash.com/400x250/?girls-football"],
-    },
-    {
-      nome: "Estrelas do Futuro",
-      local: "Centro - Rio de Janeiro",
-      faixa: "9 a 15 anos",
-      dias: "Terça e Quinta",
-      horario: "15h - 16h30",
-      fotos: ["https://source.unsplash.com/400x250/?soccer-team", "https://source.unsplash.com/400x250/?football-training"],
-    },
-    {
-      nome: "Garotas em Campo",
-      local: "Belo Horizonte",
-      faixa: "8 a 14 anos",
-      dias: "Sábado",
-      horario: "10h - 12h",
-      fotos: ["https://source.unsplash.com/400x250/?girls-soccer", "https://source.unsplash.com/400x250/?football-field"],
-    },
-  ];
-
-  const filtradas = escolinhas.filter((e) => {
-    const texto = (e.nome + e.local).toLowerCase();
-    const buscaMatch = texto.includes(busca.toLowerCase());
-    const filtroMatch = filtroFaixa ? e.faixa.includes(filtroFaixa) : true;
-    return buscaMatch && filtroMatch;
-  });
+  const [formData, setFormData] = useState({ nome: "", idade: "", email: "", telefone: "" });
 
   const abrirFormulario = (nomeEscolinha) => {
     setEscolinhaSelecionada(nomeEscolinha);
     setModalAberto(true);
   };
-
   const fecharModal = () => {
     setModalAberto(false);
     setFormData({ nome: "", idade: "", email: "", telefone: "" });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Pré-inscrição enviada para ${escolinhaSelecionada}!\nDados:\nNome: ${formData.nome}\nIdade: ${formData.idade}\nEmail: ${formData.email}\nTelefone: ${formData.telefone}`);
+    alert(`Pré-inscrição enviada para ${escolinhaSelecionada}!`);
     fecharModal();
   };
 
+  const escolinhas = [
+     { nome: "Bola de Ouro", local: "São Paulo - SP", faixa: "6 a 14 anos" },
+    { nome: "Estrelas do Futuro", local: "Rio de Janeiro - RJ", faixa: "8 a 15 anos" },
+    { nome: "Garotas em Campo", local: "Belo Horizonte - MG", faixa: "8 a 14 anos" },
+    { nome: "Chuteiras de Ouro", local: "Curitiba - PR", faixa: "7 a 16 anos" },
+    { nome: "Futuro Feminino", local: "Porto Alegre - RS", faixa: "6 a 14 anos" },
+    { nome: "Academia Estrelas", local: "Fortaleza - CE", faixa: "10 a 18 anos" },
+    { nome: "Meninas de Ouro", local: "Recife - PE", faixa: "7 a 14 anos" },
+    { nome: "Futebol e Amizade", local: "Salvador - BA", faixa: "8 a 15 anos" },
+    { nome: "Craques do Amanhã", local: "Manaus - AM", faixa: "6 a 14 anos" },
+    { nome: "Estrelas da Bola", local: "Belém - PA", faixa: "8 a 16 anos" },
+    { nome: "Soccer Girls", local: "Florianópolis - SC", faixa: "9 a 15 anos" },
+    { nome: "Futebol Feminino RJ", local: "Niterói - RJ", faixa: "8 a 15 anos" },
+    { nome: "Meninas em Campo", local: "Campinas - SP", faixa: "7 a 14 anos" },
+    { nome: "Garotas de Ouro", local: "Vitória - ES", faixa: "6 a 14 anos" },
+    { nome: "Futebol e Alegria", local: "Goiânia - GO", faixa: "8 a 15 anos" },
+    { nome: "Chuteiras Mágicas", local: "São Luís - MA", faixa: "7 a 16 anos" },
+    { nome: "Estrelas do Futebol", local: "Maceió - AL", faixa: "8 a 14 anos" },
+    { nome: "Futebol Feminino BH", local: "Belo Horizonte - MG", faixa: "6 a 14 anos" },
+    { nome: "Garotas Futebol Clube", local: "Curitiba - PR", faixa: "8 a 15 anos" },
+    { nome: "Bolas de Estrelas", local: "Porto Alegre - RS", faixa: "7 a 14 anos" },
+    { nome: "Meninas em Campo 2", local: "São Paulo - SP", faixa: "8 a 14 anos" },
+    { nome: "Craques de Amanhã 2", local: "Rio de Janeiro - RJ", faixa: "7 a 16 anos" },
+    { nome: "Futebol Feliz", local: "Fortaleza - CE", faixa: "6 a 14 anos" },
+    { nome: "Chuteiras Brilhantes", local: "Salvador - BA", faixa: "8 a 15 anos" },
+    { nome: "Estrelas Mirins", local: "Recife - PE", faixa: "7 a 14 anos" },
+    { nome: "Soccer Kids", local: "Manaus - AM", faixa: "6 a 14 anos" },
+    { nome: "Futebol e Alegria 2", local: "Belém - PA", faixa: "8 a 16 anos" },
+    { nome: "Garotas Campeãs", local: "Florianópolis - SC", faixa: "9 a 15 anos" },
+    { nome: "Academia Bola", local: "Niterói - RJ", faixa: "8 a 15 anos" },
+    { nome: "Meninas Brilhantes", local: "Campinas - SP", faixa: "7 a 14 anos" },
+    { nome: "Estrelas de Ouro", local: "Vitória - ES", faixa: "6 a 14 anos" },
+    { nome: "Futebol e Amizade 2", local: "Goiânia - GO", faixa: "8 a 15 anos" },
+    { nome: "Chuteiras de Estrela", local: "São Luís - MA", faixa: "7 a 16 anos" },
+    { nome: "Craques Mirins", local: "Maceió - AL", faixa: "8 a 14 anos" },
+    { nome: "Futebol Feminino SP", local: "São Paulo - SP", faixa: "6 a 14 anos" },
+    { nome: "Garotas Talentosas", local: "Rio de Janeiro - RJ", faixa: "8 a 15 anos" },
+    { nome: "Bola e Amizade", local: "Fortaleza - CE", faixa: "7 a 14 anos" },
+    { nome: "Estrelas do Amanhã", local: "Salvador - BA", faixa: "8 a 15 anos" },
+    { nome: "Soccer Girls 2", local: "Recife - PE", faixa: "6 a 14 anos" },
+    { nome: "Futebol Feliz 2", local: "Manaus - AM", faixa: "8 a 16 anos" },
+    { nome: "Meninas da Bola", local: "Belém - PA", faixa: "7 a 14 anos" },
+    { nome: "Academia Mirim", local: "Florianópolis - SC", faixa: "9 a 15 anos" },
+  ];
+
+  const filtradas = escolinhas.filter(e => 
+    (!filtroFaixa || e.faixa === filtroFaixa) &&
+    (!filtroLocal || e.local.includes(filtroLocal)) &&
+    (!filtroAvaliacao || e.avaliacao >= parseInt(filtroAvaliacao)) &&
+    (!filtroDias || e.dias.includes(filtroDias)) &&
+    (!filtroNivel || e.nivel === filtroNivel)
+  );
+
+  const cardsPorPagina = 6;
+  const totalPaginas = Math.ceil(filtradas.length / cardsPorPagina);
+  const mostrarEscolinhas = filtradas.slice(pagina * cardsPorPagina, (pagina + 1) * cardsPorPagina);
+
   return (
-    <div className="min-h-screen bg-[#FFFFFF] py-12 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* TÍTULO */}
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center" style={{ color: "#F06292" }}>
-          Escolinhas de Futebol
-        </h1>
-        <p className="text-lg text-center max-w-3xl mx-auto mb-10" style={{ color: "#0A192F" }}>
-          Encontre uma escolinha perto de você e faça sua pré-inscrição!
-        </p>
+    <div className="min-h-screen py-12 px-6" style={{ backgroundColor: "#F0F4F8" }}>
+      <h1 className="text-4xl font-bold mb-6 text-center text-[#F06292]">
+        Escolinhas de Futebol
+      </h1>
 
-        {/* LAYOUT: COLUNA FILTROS À ESQUERDA E CARDS À DIREITA */}
-        <div className="md:flex gap-8">
-          {/* COLUNA DE FILTROS */}
-          <div className="md:w-1/4 mb-6 md:mb-0">
-            <div className="bg-[#FFF3F6] p-6 rounded-2xl shadow-md">
-              <h3 className="text-xl font-bold mb-4" style={{ color: "#F06292" }}>Filtros</h3>
-              <input
-                type="text"
-                placeholder="Buscar por cidade ou nome..."
-                className="p-3 rounded-xl border border-gray-300 w-full mb-4"
-                value={busca}
-                onChange={(e) => setBusca(e.target.value)}
-              />
-              <select
-                className="p-3 rounded-xl border border-gray-300 w-full"
-                value={filtroFaixa}
-                onChange={(e) => setFiltroFaixa(e.target.value)}
-              >
-                <option value="">Todas as idades</option>
-                <option value="6 a 14 anos">6 a 14 anos</option>
-                <option value="7 a 16 anos">7 a 16 anos</option>
-                <option value="8 a 14 anos">8 a 14 anos</option>
-                <option value="8 a 15 anos">8 a 15 anos</option>
-                <option value="9 a 15 anos">9 a 15 anos</option>
-                <option value="10 a 18 anos">10 a 18 anos</option>
-              </select>
-            </div>
-          </div>
+      <div className="flex gap-6 max-w-6xl mx-auto">
+        {/* Coluna esquerda - Filtros */}
+        <div className="w-1/4 space-y-4 p-4 bg-white rounded-2xl shadow-md shadow-pink-100 sticky top-4 h-fit">
+          <h2 className="font-bold text-xl mb-2 text-[#003B5C]">Filtros</h2>
+          <select value={filtroFaixa} onChange={e => { setFiltroFaixa(e.target.value); setPagina(0); }} className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]">
+            <option value="">Faixa Etária</option>
+            <option value="6 a 8 anos">6 a 8 anos</option>
+            <option value="9 a 12 anos">9 a 12 anos</option>
+            <option value="13 a 16 anos">13 a 16 anos</option>
+          </select>
 
-          {/* COLUNA DE CARDS */}
-          <div className="md:w-3/4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {filtradas.map((e, i) => (
-              <div key={i} className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition transform hover:scale-105 border-l-4 border-[#F06292]">
-                <h3 className="text-xl font-bold mb-2" style={{ color: "#F06292" }}>{e.nome}</h3>
-                <p className="mb-1">📍 {e.local}</p>
-                <p className="mb-1">👧 Faixa etária: {e.faixa}</p>
-                <p className="mb-1">📅 {e.dias}</p>
-                <p className="mb-4">⏰ {e.horario}</p>
+          <select value={filtroLocal} onChange={e => { setFiltroLocal(e.target.value); setPagina(0); }} className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]">
+            <option value="">Localização</option>
+            <option value="SP">São Paulo</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PR">Paraná</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="CE">Ceará</option>
+            <option value="PE">Pernambuco</option>
+            <option value="BA">Bahia</option>
+            <option value="AM">Amazonas</option>
+            <option value="PA">Pará</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="AL">Alagoas</option>
+          </select>
 
-                {/* GALERIA DE FOTOS */}
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  {e.fotos.map((foto, idx) => (
-                    <img
-                      key={idx}
-                      src={foto}
-                      alt="foto da escolinha"
-                      className="rounded-xl object-cover h-28 w-full"
-                    />
-                  ))}
-                </div>
+          <select value={filtroAvaliacao} onChange={e => { setFiltroAvaliacao(e.target.value); setPagina(0); }} className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]">
+            <option value="">Avaliação mínima</option>
+            {[5,4,3,2,1].map(n => <option key={n} value={n}>{'★'.repeat(n)}</option>)}
+          </select>
 
-                <button
-                  onClick={() => abrirFormulario(e.nome)}
-                  className="w-full py-2 px-4 rounded-full transition hover:scale-105"
-                  style={{ backgroundColor: "#F06292", color: "#FFFFFF" }}
-                >
-                  Pré-Inscrever
-                </button>
-              </div>
-            ))}
-          </div>
+          <select value={filtroDias} onChange={e => { setFiltroDias(e.target.value); setPagina(0); }} className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]">
+            <option value="">Dias de treino</option>
+            <option value="Seg">Segunda</option>
+            <option value="Ter">Terça</option>
+            <option value="Qua">Quarta</option>
+            <option value="Qui">Quinta</option>
+            <option value="Sex">Sexta</option>
+            <option value="Sáb">Sábado</option>
+          </select>
+
+          <select value={filtroNivel} onChange={e => { setFiltroNivel(e.target.value); setPagina(0); }} className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]">
+            <option value="">Nível</option>
+            <option value="Iniciante">Iniciante</option>
+            <option value="Intermediário">Intermediário</option>
+            <option value="Avançado">Avançado</option>
+          </select>
         </div>
 
-        {/* MODAL DE PRÉ-INSCRIÇÃO */}
-        {modalAberto && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white rounded-2xl p-6 w-11/12 md:w-1/2 relative shadow-lg">
-              <button
-                onClick={fecharModal}
-                className="absolute top-4 right-4 text-gray-500 font-bold text-xl"
-              >
-                ×
+        {/* Coluna direita - Cards */}
+        <div className="w-3/4 grid grid-cols-1 md:grid-cols-2 gap-6">
+          {mostrarEscolinhas.map((e, i) => (
+            <div key={i} className="p-6 rounded-2xl shadow-md hover:shadow-xl transition transform hover:scale-105" style={{ backgroundColor: "#FFFFFF", borderLeft: "4px solid #F06292" }}>
+              <h3 className="font-bold text-xl mb-2 text-[#003B5C]">{e.nome}</h3>
+              <p className="mb-1"><strong>Local:</strong> {e.local}</p>
+              <p className="mb-1"><strong>Faixa etária:</strong> {e.faixa}</p>
+              <p className="mb-1"><strong>Avaliação:</strong> {'★'.repeat(e.avaliacao)}</p>
+              <p className="mb-1"><strong>Dias de treino:</strong> {e.dias}</p>
+              <p className="mb-1"><strong>Nível:</strong> {e.nivel}</p>
+              <button onClick={() => abrirFormulario(e.nome)} className="mt-2 py-2 px-4 bg-gradient-to-r from-[#F06292] to-[#E65A7F] text-white rounded-full hover:from-[#E65A7F] hover:to-[#F06292] transition transform hover:scale-105">
+                Pré-inscrição
               </button>
-              <h2 className="text-2xl font-bold mb-4" style={{ color: "#F06292" }}>
-                Pré-inscrição para {escolinhaSelecionada}
-              </h2>
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
-                <input
-                  type="text"
-                  placeholder="Nome da atleta"
-                  required
-                  value={formData.nome}
-                  onChange={(e) => setFormData({...formData, nome: e.target.value})}
-                  className="p-3 rounded-xl border border-gray-300"
-                />
-                <input
-                  type="number"
-                  placeholder="Idade"
-                  required
-                  value={formData.idade}
-                  onChange={(e) => setFormData({...formData, idade: e.target.value})}
-                  className="p-3 rounded-xl border border-gray-300"
-                />
-                <input
-                  type="email"
-                  placeholder="E-mail do responsável"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="p-3 rounded-xl border border-gray-300"
-                />
-                <input
-                  type="tel"
-                  placeholder="Telefone"
-                  required
-                  value={formData.telefone}
-                  onChange={(e) => setFormData({...formData, telefone: e.target.value})}
-                  className="p-3 rounded-xl border border-gray-300"
-                />
-                <button
-                  type="submit"
-                  className="py-3 px-6 rounded-full transition hover:scale-105"
-                  style={{ backgroundColor: "#F06292", color: "#FFFFFF" }}
-                >
-                  Enviar Pré-Inscrição
-                </button>
-              </form>
             </div>
-          </div>
-        )}
-
-        {/* BOTÃO VOLTAR */}
-        <div className="text-center mt-12">
-          <button
-            onClick={() => navigate(-1)}
-            className="py-3 px-6 rounded-full transition hover:scale-105"
-            style={{ backgroundColor: "#0A192F", color: "#FFFFFF" }}
-          >
-            Voltar
-          </button>
+          ))}
         </div>
       </div>
+
+      {/* Navegação */}
+      <div className="flex justify-center mt-6 gap-4">
+        <button disabled={pagina===0} onClick={() => setPagina(pagina-1)} className="py-2 px-4 bg-[#F06292] text-white rounded-full disabled:opacity-50 hover:bg-[#E65A7F] transition">Anterior</button>
+        <button disabled={pagina+1>=totalPaginas} onClick={() => setPagina(pagina+1)} className="py-2 px-4 bg-[#F06292] text-white rounded-full disabled:opacity-50 hover:bg-[#E65A7F] transition">Próximo</button>
+      </div>
+
+      {/* Modal */}
+      {modalAberto && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-2xl w-96 relative shadow-lg">
+            <button onClick={fecharModal} className="absolute top-2 right-2 font-bold text-xl text-gray-600 hover:text-gray-900">×</button>
+            <h2 className="text-2xl font-bold mb-4 text-[#F06292]">Pré-inscrição: {escolinhaSelecionada}</h2>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <input type="text" placeholder="Nome" value={formData.nome} onChange={e => setFormData({...formData, nome:e.target.value})} required className="p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]" />
+              <input type="number" placeholder="Idade" value={formData.idade} onChange={e => setFormData({...formData, idade:e.target.value})} required className="p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]" />
+              <input type="email" placeholder="Email" value={formData.email} onChange={e => setFormData({...formData, email:e.target.value})} required className="p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]" />
+              <input type="tel" placeholder="Telefone" value={formData.telefone} onChange={e => setFormData({...formData, telefone:e.target.value})} required className="p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F06292]" />
+              <button type="submit" className="py-2 px-4 bg-gradient-to-r from-[#F06292] to-[#E65A7F] text-white rounded-full hover:from-[#E65A7F] hover:to-[#F06292] transition transform hover:scale-105 mt-2">Enviar</button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
